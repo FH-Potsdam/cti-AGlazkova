@@ -48,21 +48,17 @@ function Area(x, y, w, h) {
   this.display = function() {
     if (this.isOver === true) {
       fill("#ff6347");
+    } 
+      else if (this.isOver === true) {
+        rect(this.x + 0.5, this.y + 0.5, this.w + 0.5, this.h + 0.5);
     } else {
       fill("#00ff00");
     }
     rect(this.x, this.y, this.w, this.h);
   };
-  
-  this.resize = function() {
-    if (this.isOver === true) {
-      rect(this.x + 5, this.y + 5, this.w, this.h);;
-    } else {
-      rect(this.x, this.y, this.w, this.h);;
-    }
-    rect(this.x, this.y, this.w, this.h);
-  };
 }
+  
+
 
 function keyPressed() {
   if (key === "s" || key === "S") {

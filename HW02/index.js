@@ -56,7 +56,7 @@ function Area(x, y, w, h) {
   
   this.resize = function() {
     if (this.isOver === true) {
-      rect(this.x + 0.5, this.y + 0.5, this.w, this.h);;
+      rect(this.x + 5, this.y + 5, this.w, this.h);;
     } else {
       rect(this.x, this.y, this.w, this.h);;
     }

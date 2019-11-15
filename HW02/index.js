@@ -1,20 +1,66 @@
+let x = 0;
+let canvas = undefined;
+const step = 25;
+const areas = [];
 function setup() {
-    var a = 150;
-    var canvas = createCanvas(500, 500);
-    canvas.parent('sketch');
-  
-    background(255);
-    fill(0);
-    rect(350, 0, a, a);
-    rect(350, 350, a, a);
-    rect(0, 0, a, a);
-    rect(0, 350, a, a);
+  canvas = createCanvas(500, 500);
+  canvas.parent("sketch");
+  for (let x = 0; x < width; x += step) {
+    for (let y = 0; y < height; y += step) {
+      areas.push(new Area(x, y, step, step));
+    }
   }
-  
-  
-  function draw() {
-    fill(255, 255, 255);
-    rectMode(CENTER);
-    noStroke();
-    rect(width / 2, height / 2, 300, 300);
+  noStroke();
+}
+
+function draw() {
+  for (const item of areas) {
+    item.update(mouseX, mouseY);
+    item.display();
   }
+}
+
+function Area(x, y, w, h) {
+  if (!(this instanceof Area)) {
+    throw new TypeError(
+      "Area can not be called as a function. Create an instance by calling new Area(x,y,w,h)",
+    );
+  }
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  this.isOver = false;
+
+  this.update = function(mX, mY) {
+    if (
+      mX > this.x &&
+      mX < this.x + this.w &&
+      mY > this.y &&
+      mY < this.y + this.h
+    ) {
+      this.isOver = true;
+    } else {
+      this.isOver = false;
+    }
+  };
+
+  this.display = function() {
+    if (this.isOver === true) {
+      fill("#ff6347");
+    } else {
+      fill("#00ff00");
+    }
+    if (this.isOver === true) {
+      rect(this.x * 2, this.y * 2, this.w, this.h);
+  };
+}
+
+function keyPressed() {
+  if (key === "s" || key === "S") {
+    if (canvas === undefined) {
+      throw new Error("Could not find your canvas");
+    }
+    saveCanvas(canvas, "sketch", "png");
+  }
+}

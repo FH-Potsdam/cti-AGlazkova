@@ -53,6 +53,15 @@ function Area(x, y, w, h) {
     }
     rect(this.x, this.y, this.w, this.h);
   };
+  
+  this.resize = function() {
+    if (this.isOver === true) {
+      rect(this.x + 0.5, this.y + 0.5, this.w, this.h);;
+    } else {
+      rect(this.x, this.y, this.w, this.h);;
+    }
+    rect(this.x, this.y, this.w, this.h);
+  };
 }
 
 function keyPressed() {

@@ -34,27 +34,33 @@ function Area(x, y, w, h) {
 
   this.update = function(mX, mY) {
     if (
-      mX > this.x &&
-      mX < this.x + this.w &&
-      mY > this.y &&
-      mY < this.y + this.h
+      mX > this.x - this.w / 2 &&
+      mX < this.x + this.w / 2 &&
+      mY > this.y - this.h / 2 &&
+      mY < this.y + this.h / 2
     ) {
       this.isOver = true;
+      this.rotation +=2;
     } else {
       this.isOver = false;
+      this.rotation = this.rotation < 0 ? 0: this.rotation - 1;
     }
   };
 
   this.display = function() {
-    if (this.isOver === true) {
-      fill("#ff6347");
-    } 
-      else if (this.isOver === true) {
-        rect(this.x * 2, this.y * 2, this.w * 2, this.h * 2);
+      let w = this.w;
+      push();
+      translate(this.x, this.y);
+      DeviceRotationRate(radians(this.rotation % 360));
+      if (this.isOver === true) {
+        fill("#ff6347");
+        w = w + 5;
     } else {
       fill("#00ff00");
+      w = this.w
     }
-    rect(this.x, this.y, this.w, this.h);
+    rect(0, 0, w, w);
+    pop()
   };
 }
   

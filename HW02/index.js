@@ -50,7 +50,7 @@ function Area(x, y, w, h) {
       fill("#ff6347");
     } 
       else if (this.isOver === true) {
-        rect(this.x + 0.5, this.y + 0.5, this.w + 0.5, this.h + 0.5);
+        rect(this.x * 2, this.y * 2, this.w * 2, this.h * 2);
     } else {
       fill("#00ff00");
     }
